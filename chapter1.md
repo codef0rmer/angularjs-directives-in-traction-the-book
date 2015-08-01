@@ -22,7 +22,7 @@ Who does not like to give commands and have followers to follow them? Data Bindi
 
 To understand it better, let us look at a simple but real-world example. Let’s say we have a notification panel in our application to show messages that needs to be updated every time a new message arrives. In JavaScript, we would probably do as follows.
 
-```
+```html
 <html>
 <head>
   <title>Updating Notification Panel in Pure JS</title>
@@ -42,7 +42,7 @@ There could be many places in your application from where you could update the n
 
 What if there were a simpler and better way to handle this? Well, in AngularJS, any type of data (primitives and objects) is a model and once bound to the DOM will update it automatically whenever the associated model changes. So the same thing can be accomplished using data binding in AngularJS as shown in the following listing.
 
-```
+```html
 <html ng-app="App">
 <head>
   <title>Updating Notification Panel in AngularJS</title>
@@ -63,7 +63,7 @@ With this approach, you are assured that the notification panel will automatical
 
 You might be curious to ask, Will it update the model as well if I dynamically change the content of the `<div>`? Nope. That is because it’s a one-way data binding we’ve set up in this case. The two-way data binding can be achieved with Form Controls such as Input, Textarea, Select, Checkbox, Radio, and so on.
 
-```
+```html
 <html ng-app="App">
 <head>
   <title>Two way Data Binding with Form Controls</title>
@@ -91,7 +91,7 @@ Dependency Injection (DI) is a software design pattern that deals with managing 
 
 In JavaScript, we often define a Class and create an instance of it to access its properties or methods. In this example, `sayHi()` class is dependent on `hello()` class. But, the way we’ve resolved the dependency by creating an instance of `hello()` class manually is not ideal. If, in case, the constructor definition of the `hello()` class changes in future, it will affect our class, `sayHi` as well.
 
-```
+```javascript
 function hello(who) { this.name = 'Hello ' + who; }
 function sayHi(obj) { return obj.name; }
  
@@ -101,7 +101,7 @@ console.log(sayHi(objHello));
 
 What if we could instantiate all the dependencies in one place and just pass the references wherever needed? This will loosely couple all the dependencies, and any modifications later will not affect components that were dependent on it. That’s how AngularJS manages dependencies using the Dependency Injection (DI) system built-in:
 
-```
+```javascript
 var App = angular.module('DI', []);
 App.service('Hello', function() {
   var self = this;
@@ -122,7 +122,7 @@ This approach makes it really easy to mock all dependencies during testing so we
 
 FYR, Testing code would look something like:
 
-```
+```javascript
 describe('Resolve Dependencies', function() {
   var SayHi, Hello;
    
@@ -159,7 +159,7 @@ The `<%= name%>` expression is a syntax in Underscore.js to create a placeholder
 
 In contrast, AngularJS uses HTML(DOM) as a template where only specific parts of the template updates when the model changes. The benefit of this approach of updating only the fragments of the HTML document is that it does not re-render the whole template every time but just updates those parts of the template that were associated with the models. What this means is that it introduces various directives such as ngBind, ngBindHtml, and so on to achieve this. It supports `{{ }}` as a templating syntax as an alternative to `<%= name%>` in underscore but you could use ngBind built-in directive as well to achieve the same as shown in the following listing. Create *angular-template.html* in *ch01/* directory as:
 
-```
+```html
 <html ng-app="App">
 <head>
   <title>HTML/DOM Template in AngularJS</title>
@@ -174,7 +174,7 @@ In contrast, AngularJS uses HTML(DOM) as a template where only specific parts of
 
 Then add following snippet in *js/ch01/angular-template.js* so:
 
-```
+```javascript
 var App = angular.module('App', []);
  
 App.run(function($rootScope) {
@@ -196,7 +196,7 @@ Back in the old days, every hyperlink used to refresh the page in order to load 
 
 AngularJS does not break the back button, thanks to Routing. It comes with a routing module named `ngRoute`, which enables you to programmatically generate URLs based on route definition. As given in the following example, we’ve injected `ngRoute` as a dependency (thanks to DI) that provides access to the `$routeProvider` service to define our routes. Let us look at the following route example as:
 
-```
+```javascript
 angular.module('ngRouteExample', ['ngRoute'])
 .config($routeProvider) {
   $routeProvider.when('/Book/:bookId', {
@@ -222,7 +222,7 @@ Unit Testing, as the name implies, is all about testing individual units of code
 
 If we were to write a unit test for the example we saw before *ch01/angular-template.html*. We would probably do as follows by creating *tests/specs/ch01/angular-template-unit.js* so:
 
-```
+```javascript
 describe('Test AngularJS Template', function() {
     beforeEach(module('App'));  
     var element, scope;
@@ -248,7 +248,7 @@ At the end, Jasmine will show you above display if the test succeeds.
 #### END TO END TESTING
 No matter how good programmer you are, you cannot presume that every piece of code you write will work as expected on various browsers; hence, functional testing is extremely important, and there is a need for End to End test frameworks. Protractor is an end to end test framework specifically for AngularJS applications built on top of (a wrapper for) WebDriverJS – Selenium Web Driver which is a standard web applications testing tool used everywhere. The installation of Jasmine with Karma Test Runner and Protractor with Selenium Driver is covered in detail in Chapter 3. Luckily Protractor supports Jasmine like syntax to write test cases so that you can grasp it in no time. Let us quickly check out how to write test cases in Protractor, so create *tests/specs/ch01/angular-template-e2e.js* as:
 
-```
+```javascript
 describe('Test AngularJS Template', function() {
   var str;
  
@@ -278,7 +278,7 @@ AngularJS Directives API teaches the browsers a new trick and helps them to trea
 
 AngularJS Directive is nothing but the way to expand HTML vocabulary. Having said that you can extend existing HTML element or create a new one by encapsulating custom behaviors atop. That means, we can write custom elements, attributes, and so on in AngularJS that browsers can understand using AngularJS Directives API. Here is a non-intuitive example of Accordion widget in Twitter Bootstrap as:
 
-```
+```html
 <html>
 <head>
   <title>Accordion in Twitter Bootstrap</title>
@@ -319,7 +319,7 @@ AngularJS Directive is nothing but the way to expand HTML vocabulary. Having sai
 
 However, it does fulfill the requirement of having a fancy looking accordion widget in the browser but at the expense of imperative markups that you dare to fiddle. The end-users who will end up using this UI widget no longer need to go through the pain of understanding nitty-gritty things in their way just to use the component. What they really want is the minimal, comprehensible, and declarative piece of code that makes sense to them. Up until, it was not possible to have that level of encapsulation in order to hide the complexity behind the curtain and only show things that matter to the end-users. Here is the same example converted into a declarative style using AngularJS directives API for you to get a sense of what AngularJS directives can do:
 
-```
+```html
 <html ng-app="App">
 <head>
   <title>Accordion in AngularUI Bootstrap</title>
@@ -347,7 +347,7 @@ Now the thing is that you will find this piece of markups much more comprehensib
 
 Even though this book is all about directives and we are going to explore all the configurations required to define directives in subsequent chapters, following is the blueprint for your reference.
 
-```
+```javascript
 angularmodule('MyModule', []).directive('directiveName', function () {
   return {
     restrict: 'A',
@@ -416,7 +416,7 @@ In short, AngularJS when bootstrapped, looks for all the directives built-in as 
 
 If this is overwhelming for you, here is the smallest directive that you can possibly ever write. However, it does not do anything but just there to explain how directives get registered in AngularJS. We have defined a custom directive named noop that can be used as an attribute/element as shown:
 
-```
+```html
 <html ng-app="App">
 <head>
   <title>Basic Directive: noop</title>
@@ -449,7 +449,7 @@ That’s quite simple than you think. All it does is the compilation of the HTML
 
 By now, we know that AngularJS activates directives but what does it mean? Let us slightly update the noop directive to see it in action as:
 
-```
+```javascript
 App.directive('noop', function() {
   var count = 1;
    
@@ -472,7 +472,7 @@ As learned before, the compile function generates a link function that gives acc
 
 You probably think that why there is a need for compile and link functions? Why not combine them? The only reason for the existence of the compile function is performance. To find out, let us update the `noop` directive in HTML as:
 
-```
+```html
 <div noop ng-repeat="item in [1, 2, 3, 4, 5]"></div>
 ```
 Here we basically repeat the same div element five times and each time the `noop` directive will be linked to a new instance of the DOM. And you will see `"I am noop 1", "I am noop 2"`, and so on as the counter increments. Imagine there was no compile function, the text will be injected fives times which is unnecessary because we are just repeating the same old element. Also, the linking would have happened at the same time enabling watchers and degrading the performance because the watchers are reevaluated on every digest cycle to make sure views are upto date. Now by separating the two, compiling all directives first and linking them later altogether is not only performant but also cost effective because the compile function of the `noop` directive with ngRepeat will be triggered once whereas the linking function will be called for each iteration.
@@ -498,7 +498,7 @@ jQuery is a great library serving to bridge the gap between different browsers b
 
 Take a look at the following jQuery snippet in which we simply bind a click handler on the button that posts content on Google Plus.
 
-```
+```javascript
 $('.post-to-gplus').click(function() {
   share();
   $(this).hide();
@@ -508,7 +508,7 @@ $('.post-to-gplus').click(function() {
 ```
 The problem with this piece of code is that we have to wait until the page loads completely in the browser before we bind the click event on the button. Also the approach would not scale if we use multiple instances to share various posts. What if we make it declarative and less cluttered to handle multiple instances without modifying a bit. Here is the AngularJS version of the same.
 
-```
+```html
 <button ng-click='share(); shared = true;' ng-hide='shared'>
   Post to Google Plus
 </button>
@@ -538,7 +538,7 @@ Developers often have to work closely with web designers to knit a well-designed
 
 Here is a simple example to render a list of to-do items. We just iterate over a collection of to-dos and render them as an ordered list.
 
-```
+```javascript
 var html = '<ol class=”todo-list”>';
  
 for (var I = 0; I < todos.length; I++) {
@@ -553,7 +553,7 @@ This makes it really hard for any designer to modify it if he is not aware of Ja
 
 AngularJS’s HTML as a template strategy pays off perfectly for both designers and developers in such scenario. So this will change to:
 
-```
+```html
 <body>
   <ol>
     <li ng-repeat='todo in todos' ng-class='{true: “done”, false: “undone”}[todo.done]'>
@@ -573,7 +573,7 @@ AngularJS does not discourage developers from using jQuery but helps them instea
 
 AngularJS enforces declarative than imperative DOM manipulation and to a certain extent the declarative approach solves many problems. But, when you use any jQuery plugin the imperative syntax is inevitable, after all, jQuery is a DOM manipulation library. Still you can encapsulate the jQuery initialization code into its own angular directive to keep it simple. So this trivial jQuery plugin:
 
-```
+```javascript
 $(document).ready(function() {
   $('#mytab').fancyTabs();
 });
@@ -581,7 +581,7 @@ $(document).ready(function() {
 
 Will change to more readable, manageable, and declarative markup ever.
 
-```
+```html
 <fancy-tabs id='mytab'></fancy-tabs>
 ```
 
