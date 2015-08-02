@@ -1,4 +1,5 @@
 # Understanding Scope in Directives for better context
+
 This chapter covers
 * How scope brings newness to the framework like AngularJS
 * Learn to write a simple directive that shares the global scope
