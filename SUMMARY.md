@@ -6,3 +6,4 @@
 4. [Learning to extend HTML with the Directive  API](./chapter4.md)
 5. [Understanding Scope in Directives for better context](./chapter5.md)
 6. [Crafting directives to handle Complex Scenarios](./chapter6.md)
+7. [Bringing directives to Life](./chapter7.md)
