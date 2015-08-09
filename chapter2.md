@@ -145,7 +145,7 @@ Now that we've injected the value as a dependency in `run()` method to bind it t
 ```html
 <div>{{message}}</div>
 ```
-![Angular Value in Action](2.1-value.png)
+![Angular Value in Action](screens/2.1-value.png)
 
 #### Constant
 Unlike values, Constant lets us register values which can be injected into a module's  configuration function to be decorated. Imagine you want to limit login attempts to 3 (maximum) which is a standard way to stop any kind of suspicious activities (probably by hackers) on the web or you might want to use Pi value for mathematical calculations in your application, the angular constant provides a better interface to do that.  In JavaScript, you would do:
@@ -289,7 +289,7 @@ angular.module('SEA', [])
 
 Please note that the methods returned by `$get` can not be called during configuration unlike those which are outside. Although, It's a bit confusing for you to understand why have we named the provider as `lookupService`? That is because the provider ultimately creates a service. Finally this is what we'll see in the browser. 
 
-![Angular Provider in Action](2.2-provider.png)
+![Angular Provider in Action](screens/2.2-provider.png)
 
 Notice that *google.com* has been replaced by *bing.com* on the fly.
 
@@ -347,7 +347,7 @@ angular.module('SEA', ['ngSanitize'])
 
 This will turn *bing.com* into a weblink as shown below.
 
-![Angular Filter linky in Action](2.3-filter.png)
+![Angular Filter linky in Action](screens/2.3-filter.png)
 
 Apart from data formatting, Angular filters also provide high level of code abstraction because sometimes flooding services with utility functions is a bad practice. Let's write a custom filter to make the message Camel Cased. 
 
@@ -371,7 +371,7 @@ angular.module('SEA', ['ngSanitize'])
 
 Using the filter constructor, you can actually expand the range of built-in filters and use them the same way. Then we've passed the output of `linky` to the `CamelCase` filter. The below figure shows how it works.
 
-![Angular Filter CamelCase in Action](2.4-filter.png)
+![Angular Filter CamelCase in Action](screens/2.4-filter.png)
 
 Angular filters API is a great example of abstracting a huge but crucial implementation into tiny testable pieces.
 
@@ -449,7 +449,7 @@ angular.module('SEA', ['ngSanitize'])
 
 The following figure demonstrates the usage of all of these instances all together.
 
-![Configuration Phase](2.5-config.png)
+![Configuration Phase](screens/2.5-config.png)
 
 The configuration phase is the best place to replace and extend any part of the AngularJS core.
 
@@ -587,7 +587,7 @@ Notice, in both the controllers, we have defined the same model named person. Th
 
 The code is pretty straight forward to understand as we've simply specified the controllers and using their respective models to display the details. At the end, this is what you'll see in the browser.
 
-![Controller in AngularJS](2.6-controller.png)
+![Controller in AngularJS](screens/2.6-controller.png)
 
 Many few people know that the CEO is not the king of the company and even he has to report to someone i.e. board of directors. So let's try nesting both the controllers and let the CEO tell who he reports to.
 
@@ -648,7 +648,7 @@ App.controller('BODCtrl', function($scope) {
 
 Alternatively you could bind the person object directly to this instead of `$scope`, but then we would have to replace all the instances of `person.*` with `bod.person.*` in the DOM. Use what you prefer. This will update as: 
 
-![ControllerAs syntax in AngularJS](2.7-controlleras.png)
+![ControllerAs syntax in AngularJS](screens/2.7-controlleras.png)
 
 We saw how a controller is an essential ingredient in the MVC framework like AngularJS and let's us structure an application nicely. Now let us crack Data Binding.
 
@@ -758,7 +758,7 @@ And we'll use it in HTML as follows:
 
 Here favorite refers to each item in the collection. You will see the following output.
 
-![ngRepeat in Action](2.8-ngrepeat.png)
+![ngRepeat in Action](screens/2.8-ngrepeat.png)
 
 Adding an instant search functionality to a collection to quickly filter out the data, always gives me the creeps and so may you. It's horrified and time consuming to implement it in pure jQuery or JavaScript from the scratch. In contrast, angular makes it way simpler than ever using built-in `search` filter. We'll first add an input to type the search criteria:
 
@@ -781,7 +781,7 @@ As we saw in earlier sections that angular let's us define custom filters but it
 
 Passing the model, `search` will filter out the collection as:
 
-![ngRepeat with search filter in Action](2.9-ngrepeat-search.png)
+![ngRepeat with search filter in Action](screens/2.9-ngrepeat-search.png)
 
 So iterating over a collection and rendering the data in HTML was never easier than this. Also custom and built-in filters power us to extend its behavior.
 

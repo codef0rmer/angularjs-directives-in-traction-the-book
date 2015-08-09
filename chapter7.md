@@ -12,14 +12,14 @@ Over the years, developers have been writing webapps in a traditional way. What 
 
 Take an example of Gmail – a web based email application - that keeps track of a total number of unread mails in an In-box on the left hand side and at the same time syncs it up with a list of all the mails shown on the right hand side. The moment we open any unread mail, the unread count goes down by 1 immediately as shown in the following figure.
 
-![UI Sync in Gmail](7.1.png)
+![UI Sync in Gmail](screens/7.1.png)
 
 This is called DOM mutation and there are in-numerous places where we do active DOM manipulation using DOM APIs in JavaScript, jQuery, and other similar libraries. When an application becomes large, it is very cumbersome to manage all the pieces in a sane way.  However, there is no wrong using those libraries but definitely we can do better. By eliminating much of the boilerplate code needed, we can focus on building the actual application than scaffolding everything all over again. So AngularJS team has thought through the problem and came up with an idea to implement two-way data binding in AngularJS. This basically offloads the efforts required by developers into a framework itself, saving their time to utilize it for better use.
 
 ### Understanding $digest
 We already had the bird's eye view of the `$digest` loop in Chapter 1 that takes care of the two-way data binding, so we'll go straight into understanding what does it mean exactly? Well,   when any data binding expression such as `{{}}`, `ng-bind`, `ng-class`, and so on is compiled, a watcher gets registered for the same that will be evaluated during the digest cycle and it's listener is called or re-run every time the binding's value changes. There are multiple bindings used at a time and hence their listeners are maintained in a collection of objects named ```$watchers``` which is available per scope. As we all know so far that root scope is the top most scope in any AngularJS application and remaining scopes become children. They further may have child scopes as well thus creating a tree or graph like data structures. Below are the details needed for each watcher to effectively figure out when to call the listener to update the view.
 
-![$$watchers list per Scope](7.2.png)
+![$$watchers list per Scope](screens/7.2.png)
 
 As you could see, each `$watcher` carries five properties pertaining to the watch method whenever it gets registered either manually or automatically using built-in directives. They are:
 
@@ -35,7 +35,7 @@ As you could see, each `$watcher` carries five properties pertaining to the watc
 
 So, whenever a value, `get` of an expression, `exp` changes, the current value is compared with the previously stored one, `last` and the view is updated by calling the listener, `fn`, if it did not match or is dirty. Please note that the digest loop runs from `$rootScope` to deep down the scope tree using depth-first search algorithm (DFS). The DFS processes vertices first deep and then wide as illustrated below. Imagine each of the vertex (with children) as a scope in a tree and arrows follow the direction the way each scope object is reached to evaluate all of its watchers before moving onto a next scope. However,  watchers (leaf nodes) are evaluated recursively.
 
-![DFS implementation in digest loop](7.3.png)
+![DFS implementation in digest loop](screens/7.3.png)
 
 In order to maintain such a hierarchy by AngularJS, each scope has ```$nextSibling```, ```$prevSibling```, ```$childHead```, and ```$childTail``` objects for easy traversing during the digest loop and locate the appropriate scope for further processing of watchers. Hence less as well as light-weight watchers are extremely useful so that the digest loop completes as quickly as possible that makes an application responsive and unobtrusive. However, updating a JavaScript variable (defined with var) in AngularJS context does not trigger a digest loop, so what exactly triggers it, you may ask?
 
@@ -103,7 +103,7 @@ Here  `ngEventHandler` method is a postLink method that will be called for each 
 
 In this simple example, I've added two dummy bindings but there could be lot of them in real-world applications. When we click the button, you'll notice following in the console:
 
-![$apply call runs $rootScope.$digest loop](7.4.png)
+![$apply call runs $rootScope.$digest loop](screens/7.4.png)
 
 In fact, you'll never need the `$apply` call for models that change within the AngularJS context. But it will be useful outside the context such as jQuery plugin or JavaScript DOM events which we will see later.
 
@@ -142,7 +142,7 @@ App.directive('customClick', function($parse) {
 
 Note that we've created a new child scope to separate it out from the parent scope and its bindings during digest. When the button is clicked, we update the model, `who`, that triggers the digest loop to update the bindings for the current scope only using `$digest` instead of `$apply`. To our surprise, this only evaluates `whoKnocked` binding, leaving others untouched as shown in the following figure.
 
-![$digest call runs $digest loop for the current scope unlike $apply](7.5.png)
+![$digest call runs $digest loop for the current scope unlike $apply](screens/7.5.png)
 
 The takeaway is that the `$apply` method triggers a digest on the root scope which is a bit scary to think of in the first place because all of the bindings used in an application will be re-evaluated during each digest cycle and some of them may call their listeners as well. Hence its very likely to slow down AngularJS application if we do not know these important bits of information and how to use it at your disposal we'll be covered in the next section.
 

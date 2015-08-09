@@ -153,7 +153,7 @@ In string-based templating, we wrap an HTML into a pair of `<script>` tags, comp
 
 As per the following figure, the moment we update the model, each time the whole template will be recompiled and re-rendered in the browser.
 
-![How Templating works in Underscore.js](1.1-underscore-templating.png)
+![How Templating works in Underscore.js](screens/1.1-underscore-templating.png)
 
 The `<%= name%>` expression is a syntax in Underscore.js to create a placeholder for name. The trade-off of this approach is that as the template becomes larger, the amount of stuff that needs to be re-rendered grows, which is slow and wasteful.
 
@@ -186,7 +186,7 @@ When AngularJS bootstraps, it compiles the HTML and feeds in the actual data rep
 
 More specifically, in this example, only `span` tag will be updated if `name` updates to something else later, unlike string-based templates, where the entire template string has to be interpreted in order to replace just the `name` expression. Let’s see how AngularJS does it:
 
-![How Templating works in AngularJS](1.2-angular-templating.png)
+![How Templating works in AngularJS](screens/1.2-angular-templating.png)
 
 As you can notice that all the pieces such as a template, data model, and view remain the same as in string based templates but the very difference lies in the compilation of the template which only happens once. Furthermore, data binding takes care of updating relevant parts of the view (instead of entire view) upon model mutation.
 
@@ -241,7 +241,7 @@ describe('Test AngularJS Template', function() {
 ```
 In this simple test snippet, we’ve set up a Jasmine framework to run the test. In Jasmine, `describe()` block allows you to group related tests cases and `it()` block lets you write the actual test to perform. In this case, we’ve injected two dependencies, namely, `$rootScope` and `$compile`. The `$rootScope` is single root `$scope` that every AngularJS application has. Later we create a DOM in memory using `angular.element()` – an alias for the jQuery (`$`) object and compiled it by passing in the `$rootScope` to the `$compile` service – that replaces placeholders with actual values on the scope. Finally, we make sure that the element contains the valid text with `expect()` – an expectation in Jasmine is an assertion which implements comparison between the actual value and the expected value.
 
-![Unit Test Report for AngularJS Template example in Jasmine](1.3-angular-template-unit.png)
+![Unit Test Report for AngularJS Template example in Jasmine](screens/1.3-angular-template-unit.png)
 
 At the end, Jasmine will show you above display if the test succeeds.
 
@@ -262,7 +262,7 @@ describe('Test AngularJS Template', function() {
 
 In the `describe()` block, we are creating an instance of protractor and loading a page to perform tests on. As soon as we run protractor on a command line, `browser.get()` will fetch the specified html page in real browsers and perform a lookup for the binding, `{{name}}` using `by.binding()` syntax. Finally we’re just matching the actual value with the expected one. If everything goes well then this is what you’ll see in the command line.
 
-![E2E Test Report for AngularJS Template example in Protractor](1.4-angular-template-e2e.png)
+![E2E Test Report for AngularJS Template example in Protractor](screens/1.4-angular-template-e2e.png)
 
 So AngularJS framework is extremely conscious about testing every bit of AngularJS applications, even directives are no exception!
 
@@ -528,7 +528,7 @@ Writing a huge application is not a one-man show so we often work with groups of
 
 Suppose you are building the next generation social network named Friendular to beat Google Plus and Facebook. You can break the application into different blocks as shown in the following figure. Each of these blocks could be developed separately and does one thing only.
 
-![Breaking Monolithic application into Lego Bricks](1.9-lego-bricks.png)
+![Breaking Monolithic application into Lego Bricks](screens/1.9-lego-bricks.png)
 
 As you can see the entire application is built on top of tailor-made custom directives just like Lego bricks. This alleviates the pain points and helps to catch potentials bugs/issues at an early stage.
 

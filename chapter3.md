@@ -87,7 +87,7 @@ npm init
 
 You will be bombarded with few questions by the command such as *name of the package, description, version, entry point, test command, git repository, keywords, author, and license*. These information will be important for us to publish AngularJS directives later. For now, name and author information is enough to move on as shown:
 
-![npm init command in action](3.2-npm-init.png)
+![npm init command in action](screens/3.2-npm-init.png)
 
 > NOTE: To get more specifics of NPM's package.json handling, please go through https://www.npmjs.org/doc/json.html
 
@@ -109,7 +109,7 @@ bower init
 
 Please enter p*roject name, description*, and so on when asked. At the end, it will create `bower.json` which is really useful to encompass references of external modules or jQuery plugins. You can check out the following figure to fill in the answers.
 
-![bower init command in action](3.3-bower-init.png)
+![bower init command in action](screens/3.3-bower-init.png)
 
 Now that bower has been set up, let us install following dependencies locally instead of loading them directly via CDN as seen in previous chapters:
 
@@ -129,7 +129,7 @@ npm install
 
 You can take a look at `bower.json` to find records of all the packages that are downloaded under `bower_components/` directory. 
 
-![bower install command in action](3.4-bower-install.png)
+![bower install command in action](screens/3.4-bower-install.png)
 
 We have successfully installed the prerequisite softwares such as Git, Node, NPM, and Bower on top of which our testing stack will run. Now let us set up Karma and Protractor in following sections.
 
@@ -142,7 +142,7 @@ First thing to note here is that Karma is not a framework to write unit tests. I
 
 Once specified browsers are captured, the results for each test against each browser are examined and displayed via the command line to the developer such that they can see which browsers and tests passed or failed in real-time. We'll set it up soon but here is how it looks to get you excited:
 
-![Karma passed Jasmine Tests for Google Chrome](3.5-karma-result.png)
+![Karma passed Jasmine Tests for Google Chrome](screens/3.5-karma-result.png)
 
 Karma also watches all the files, specified within the configuration file, and whenever any file changes, it triggers the test run by sending a signal to the testing server to inform all of the captured browsers to run the test code again. Each browser then loads the source files inside an Iframe, executes the tests and reports the results back to the server. The server collects the results from all of the captured browsers and presents them to the developer in the terminal. The main goal of Karma is to bring a productive testing environment to developers.
 
@@ -300,7 +300,7 @@ browsers: ['Chrome', 'Firefox'],
 
 If we restart karma again with `karma start unit.conf.js` command in the terminal then we'll see both browsers running the same tests as shown in the following figure.
 
-![Chrome and Firefox launcher with Karma](3.6-chrome-firefox-karma.png)
+![Chrome and Firefox launcher with Karma](screens/3.6-chrome-firefox-karma.png)
 
 > TIP: Please visit https://www.npmjs.org/browse/keyword/karma-launcher to install other kinds of launcher including IE, Safari, Opera, and so on.
 

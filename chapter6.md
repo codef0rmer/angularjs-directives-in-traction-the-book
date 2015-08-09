@@ -132,7 +132,7 @@ Please note that scope has not been created yet so we can not access it in the c
 
 This simple directive basically dumps the template into the directive's body and then ngRepeat just renders it for five times. If you may have thought that the compile method calls for each item in the list then you are surely wrong as shown in the following figure.
 
-![Understanding Compile Phase](6.1-compile-check.png)
+![Understanding Compile Phase](screens/6.1-compile-check.png)
 
 As you could see, the compile method calls only once for all but why?
 
@@ -335,7 +335,7 @@ App.directive('thumb', function() {
 
 As of now, there is no benefit of using compile method in this specific directive but it may be helpful in case we want to manipulate the template for the thumb directive later. Remember we were passing the thumb width and gap via attributes to the thumbviewer directive that will replace the hard coded value `150px` later to auto scale itself in order to accommodate all the thumbnails. Here is what you will see in the browser.
 
-![Using Link and Compile methods in thumbviewer and thumb directives](6.2-base-link.png)
+![Using Link and Compile methods in thumbviewer and thumb directives](screens/6.2-base-link.png)
 
 I'm sure you must be disappointed not to see all the thumbails here that we added into thumbviewer directive in the DOM earlier. But if you recall what we have learned about `templateUrl` and `replace` options in Chapter 4 that the base element gets replaced by the template. So is there any way to include an external content into the template? Let us read on the following section to find out.
 
@@ -390,7 +390,7 @@ As expected we had set transclude option to true to enable transclusion. Angular
 
 When the alert directive gets compiled, it's content/body will be transcluded inside the template where ngTransclude directive is defined and finally the directive declaration will be replaced by the template. Go ahead and give it a shot.
 
-![Include an external markup into the template using ngTransclude](6.3-transclude.png)
+![Include an external markup into the template using ngTransclude](screens/6.3-transclude.png)
 
 
 In case you want to manipulate the content before the transclusion, you can completely get rid of the ngTransclude directive used in the template and introduce a transcludeFn method as a 5th argument in a link function. This method gives access to a cloned transcluded element which you can manipulate before injecting it into the template manually unlike ngTransclude directive (that does it automatically). Let's update the directive to see it in action so:
@@ -429,7 +429,7 @@ So the takeaway here is that use this option only if you want to transclude the 
 
 ### transclude: 'element'
 This option allows to transclude the whole element along with its content on which the directive was binded. If you change `transclude: true` option to `transclude: 'element'` in the previous example and reload the browser, you will not see any visual change but the underlining template has been modified as shown in the following figure:
-![Transclude Element into the template](6.4-transclude-element.png)
+![Transclude Element into the template](screens/6.4-transclude-element.png)
 
 You could see that the alert directive itself goes into the template (under `<p>` element) but does not get recompiled further to avoid never ending recursive compilation process – luckily  AngularJS takes care of that..! This option is mainly used by the built-in ngRepeat directive where it needs to copy the same repeatable element to render it over and over again. Other built-in directives also such as ngInclude, ngIf, and ngSwitch use this option to include, remove, and recreate external or default portion of markups. However, this option is rarely used outside.
 
@@ -505,7 +505,7 @@ Note, this will transclude all the thumbnails that ngRepeat spewed in the DOM. N
 
 You will be excited to see thumbViewer quite working as per the following figure.
 
-![Using transclude in thumbviewer and thumb directives to inject an external markup into template](6.5-base-transclude.png)
+![Using transclude in thumbviewer and thumb directives to inject an external markup into template](screens/6.5-base-transclude.png)
 
 ## Controlling behavior and sharing
 In Chapter 2, we learned about AngularJS Controller in detail and how it helps to avoid polluting global scope. Directive also has a special type of controller called *Directive Controller*. However, it is not different than the normal controller. In fact, you can inject the normal controller into the directive definition to use it as a directive controller. There are two ways to define Directive Controller on the directive. First is to define it inline as:
@@ -604,7 +604,7 @@ App.directive('thumbviewer', function() {
 ```
 For now, we have hardcoded a total number of thumbnails loaded in the `wrapperStyle()` method because that information is not available yet but we'll be obtained via require option in the next section. However, this will atleast render all the thumbnails in a single row as shown in the following figure:
 
-![Using controller in thumbviewer](6.6-base-controller.png)
+![Using controller in thumbviewer](screens/6.6-base-controller.png)
 
 Let us look at the final piece of the puzzle to access the controller in the thumb directive in the following section so that we will able to dynamically calculate the total number of thumbnails which is currently hard-coded as we saw before.
 
@@ -737,7 +737,7 @@ Note that the `this` parameter passed to `select()` method refers to an isolate 
 That's it! Our thumbnailviewer directive is almost ready as shown in the following figure.
 
 
-![Using require in thumbviewer](6.7-base-require.png)
+![Using require in thumbviewer](screens/6.7-base-require.png)
 
 You can go ahead and try clicking couple of thumbs and see how it works. Meanwhile, let us walk through some important advices as:
 * The only purpose of require option is to inject the directive controller into the directive and read/write shared properties/methods.
@@ -753,7 +753,7 @@ Some of built-in directives such as ngModel, ngInclude, and ngSwitch expose dire
 
 As we have learned about ngModel in chapter 2 that is mainly useful for binding the view into a model, often used with form elements but you can use it with any directive that holds some sort of value (object or primitives) that is used by other AngularJS components. The ngModelController provides access to various services for data bindings, validations, model formatting and parsing as shown in the following figure.
 
-![ngModelController API](6.8-ng-model.png)
+![ngModelController API](screens/6.8-ng-model.png)
 
 We'll go through all of them one by one, see their benefits, and use some of them in thumbviewer directive if necessary. Imagine there is a Job application form you want candidates to fill in and HTML form is the great example to dig ngModelController deep. So, let us quickly create a simple example to see how it works. Create *ch06/ng-model.html* as:
 

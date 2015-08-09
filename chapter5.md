@@ -38,7 +38,7 @@ Moreover, **Scope** is an integral part of AngularJS lifecyle to perform data bi
 ```
 The browser console will show you the following as follows. 
 
-![Understanding $rootScope](5.1-rootscope.png)
+![Understanding $rootScope](screens/5.1-rootscope.png)
 
 There you could see our model `name` assigned with the same value defined earlier in the run block which is Root. Note that public properties in the scope object are prefixed with `$` whereas private ones use ```$```. It is recommended to use only public properties such as `$parent` in the application if needed. You can also notice that the scope object has some weird private properties, ```$child, $childHead, $childTail, and $nextSibling``` which AngularJS uses to traverse through the scope hierarchy during the digest cycle to find respective ```$watchers``` for dirty checking.
 
@@ -52,7 +52,7 @@ The rootScope is the top most scope in the hierarchy so it will never have any n
 
 The ngController directives in HTML will instantiate all three AngularJS controllers defined before in JavaScript. Now after refreshing the page, you will find the information about child scopes under ```$childHead``` as well as ```$childTail``` as shown in the following figure.
 
-![$scope Hierarchy](5.2-childscopes.png)
+![$scope Hierarchy](screens/5.2-childscopes.png)
 
 However, the most important thing to note here is that each of the child scopes refer to their parent scope. As you may know that JavaScript uses Prototypical Inheritance to maintain object hierarchy. In a prototypal system, objects inherit from other objects and that is why we can easily find the parent scope for any child scope by looking at `__proto__` or `$parent` object.
 
@@ -135,7 +135,7 @@ Notice that our directive does not have it's own scope but sharing the parent on
 
 Over the course of this book, we learned that the real benefit of directives is that they facilitate re-usability of the code by allowing us to re-use the same directive in many places without any side effects. But if you use two instances of `<adia-spinner>` element in HTML, you will be surprised to see that if the first instance increments the value, the other instance also shows the updated value immediately. The following figure focuses on the issue:
 
-![Spinner Directive with scope: false](5.3-scope-false.png)
+![Spinner Directive with scope: false](screens/5.3-scope-false.png)
 
 However, it is not at all intimidating to see such abnormal behavior because both are sharing the same parent scope which means if you update the value in the controller, both directives will reflect the exact value instantly. On the other hand, if any of the directives modifies the same on its scope, it will be reflected by other directive as well. 
 
@@ -246,7 +246,7 @@ Let us test it out quickly. Add one more instance of the spinner directive next 
 
 There you go! We can now use the same directive to display different set of data in the form of Spinner:
 
-![Spinner Directive with scope: true and supports the range type](5.4-scope-true.png)
+![Spinner Directive with scope: true and supports the range type](screens/5.4-scope-true.png)
 
 ### $evaluating AngularJS expressions
 One thing you might have noticed that we have used `scope.$eval` call to transform a list passed as a string attribute into a JavaScript array. The `$eval` method executes AngularJS expressions but not JavaScript expressions on the current scope and returns the result. So ```$rootScope.$eval('name')``` is same as ```$rootScope.name```. Both will return the same value i.e. *Root*. The `$eval` call takes 2 parameters, an expression to evaluate and local value (as JavaScript object) to replace with. However, the second parameter is optional. In addition to that you can also do a lot more cool stuff with it as follows:
@@ -477,7 +477,7 @@ App.controller('ScopeCtrl', function($scope) {
 ```
 Go ahead and check it out..! When submit is pressed, you should see the selected weekday and rating as per following figure.
 
-![Spinner Directive with Isolate Scope](5.5-scope-isolate.png)
+![Spinner Directive with Isolate Scope](screens/5.5-scope-isolate.png)
 
 I'm sure you may be wondering about why there is a need of `ScopeCtrl` to have callbacks defined outside of directives as Isolate scope is all about pluggable components that have no intent to use AngularJS expressions inherently. Well, your assumption is damn right and there is a scope of improvement using `ngModel` on the directive which we'll cover in Chapter 6 after getting the hang of `require` option. For now, let us move forward to write test cases for the same in the next section.
 
@@ -581,7 +581,7 @@ it('Should work with type: list', inject(function($rootScope, $compile) {
 
 Now that we have the specs ready, just run ```“npm run test-unit”``` command in the terminal to see all tests passing as:
 
-![Unit testing the Spinner directive](5.6-unit.png)
+![Unit testing the Spinner directive](screens/5.6-unit.png)
 
 We are now rest assured that the Spinner directive is bullet proof and works as intended. Let us write E2E tests to do functional testing as well. First update the suites for this chapter in *e2e.conf.js* as:
 
@@ -714,7 +714,7 @@ with:
 ```
 Here we have just added a close icon next to each movie so that we can see if the iscroll updates when any movie is removed from the list.
 
-![Auto Updating iscroll with scope](5.7-iscroll.png)
+![Auto Updating iscroll with scope](screens/5.7-iscroll.png)
 
 As soon as we remove any movie, the `$digest` cycle will run to update the ```<li>``` list, and the iScroll `$watch` will be triggered to update itself. Try at your end.
 

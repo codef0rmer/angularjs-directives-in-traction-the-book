@@ -133,7 +133,7 @@ App.directive('superMarquee', function() {
 
 Do not worry about compile function for now as it will be covered in detail in later chapters. For now, consider it as a wrapper to put up a logic for the directive. Here we've just a string with each word wrapped in `span` tags which ultimately go within a ```<marquee>``` tag. Later we insert the markup in the element itself using a jQuery ```.html()``` method. With this, our directive must start to roll text in the browser as shown:
 
-![scrolling text with wave effect using super-marquee directive](4.1-marquee-wave.png)
+![scrolling text with wave effect using super-marquee directive](screens/4.1-marquee-wave.png)
 
 That's just an HTML attribute but let us look at other ways of using the `restrict` option and their pros and cons.
 
@@ -262,7 +262,7 @@ And update the table so:
 
 Then this will load `super-marquee` within the table itself as shown in the following figure.
 
-![Benefit of using super-marquee directive as HTML comment](4.2-marquee-comment.png)
+![Benefit of using super-marquee directive as HTML comment](screens/4.2-marquee-comment.png)
 
 Now comment level directives do not have pros except the one we just saw with ```<table>``` but has many cons as given below: 
 * Can not be used with element, attribute, and class level directives.
@@ -503,7 +503,7 @@ As both directives have compile methods, the `superMarquee` directive will be co
 
 Now, you will see it working irrespective of directives' placements as shown in the following figure:
 
-![Priority option in action](4.3-marquee-priority.png)
+![Priority option in action](screens/4.3-marquee-priority.png)
 
 So the takeaways are:
 
@@ -799,7 +799,7 @@ div.wave {
 You can customize the CSS to adjust the superMarquee's container size, wave movement, and character bump to suit your needs. Here is your little bumpy `superMarquee` is ready.
 
 
-![Extended <super-marquee>](4.4-super-marquee.png)
+![Extended <super-marquee>](screens/4.4-super-marquee.png)
 
 Go customize the CSS keyframes to make it even wave-er.
 
@@ -877,7 +877,7 @@ it('Should loop through characters to wrap them in SPANs If not available', inje
 
 Once we run these test cases in the browser, you will see the following result.
 
-![Testing <super-marquee> in Jasmine](4.5-super-marquee-unit.png)
+![Testing <super-marquee> in Jasmine](screens/4.5-super-marquee-unit.png)
 
 Having all the unit tests passed, we are now relieved from worries and free to update the directive without hesitating a bit. In fact, even if you break something unknowingly, broken tests will let you know about it immediately.
 
